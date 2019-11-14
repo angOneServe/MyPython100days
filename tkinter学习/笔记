@@ -1,13 +1,23 @@
 1.tkinter中的鼠标形状cursor设置：
 "arrow" "circle" "clock" "cross" "dotbox" "exchange" "fleur" "heart" "heart" "man" "mouse" "pirate" "plus" "shuttle" "sizing" "spider" "spraycan" "star" "target" "tcross" "trek" "watch"
+
+
 2.label 参考链接：https://blog.csdn.net/qq_41556318/article/details/85079411
+
+
 3.tkinter
     参考链接1：https://cloud.tencent.com/developer/section/
     参考链接2：https://www.jianshu.com/p/c9fb28367015
     参考链接3(细节)：https://blog.csdn.net/weixin_42272768/article/details/100191059
+
+
 4.python100days:https://github.com/jackfrued/Python-100-Days/blob/master/Day01-15/13.%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B.md
 
+
+
 5.Tk()实例化窗口后，geometry设置窗口大小的字符串参数格式"axb+x+y"，a：窗口宽度 b:窗口高度  x:窗口x坐标，0为屏幕左边  y:窗口y坐标，0为屏幕上面【屏幕左上角为零点】
+
+
 
 6.pack布局的参数：
     side[靠边]：left right top bottom
@@ -18,6 +28,9 @@
     pady:y方向的外边距
     ipadx:x方向的内边距
     ipady：y方向的内边距
+
+
+
 7.text属性：
     autoseparators	单词之间的间隔。默认值是1
     background
@@ -56,6 +69,9 @@
     wrap	    定义如何折行显示文本控件的内容
     xscrollcommand
     yscrollcommand	将滚动条与文本控件关联起来，处理滚动条动作。滚动条分别对应水平或者垂直滚动条。
+
+
+
 
 8；menu参数
 
@@ -209,4 +225,18 @@ add(type, **options)
     yposition(index)
     -- 返回 index 参数指定的菜单项的垂直偏移位置
     -- 该方法的目的是为了让你精确放置相对于当前鼠标的位置弹出菜单
+
+
+win.bind("按键",回调事件)
+    响应特殊按键事件
+    <Button-1>    鼠标左键
+    <Button-2>    鼠标中建
+    <Button-3>    鼠标右键
+    <Shift_L>     左shift按键响应
+    <Shift_R>     右shift按键响应
+    <F2>          F2按键相应，F3,F4.....
+    <Return>      回车按键相应
+    <BackSpace>   退格删除键相应
+    a    指定按键盘a键触发
+    x    指定按键盘x键触发
 

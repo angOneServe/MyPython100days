@@ -31,11 +31,20 @@ menup2=Menu(menu_bar,tearoff=True,title="Edit")
 menup2.add_command(label="cut",command=lambda :print("cut"))
 menup2.add_command(label="copy",command=lambda :print("copy"))
 
+menup3=Menu(menu_bar,tearoff=False)
+menup3.add_command(label="exit",command=lambda:win.quit())
+
 #菜单栏添加子菜单
 menu_bar.add_cascade(label="File",menu=menup1)
 menu_bar.add_cascade(label="Edit",menu=menup2)
+menu_bar.add_cascade(label="exit",menu=menup3)
 
-frame=Frame(win,)
-
+#右键事件绑定
+def ShowMenu1(event):
+    menup1.post(event.x_root,event.y_root)
+win.bind("<Button-1>",ShowMenu1)
+def ShowMenu2(event):
+    menu_bar.post(event.x_root,event.y_root)
+win.bind("<Button-3>",ShowMenu2)
 #窗口事件循环
 win.mainloop()
