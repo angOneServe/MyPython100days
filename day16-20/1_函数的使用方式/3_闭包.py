@@ -33,3 +33,5 @@ var()
 var()
 var()
 var()
+
+del(var)#删除后，其数据都不再存在了
