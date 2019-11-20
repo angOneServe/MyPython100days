@@ -1,0 +1,69 @@
+decorator
+
+1、装饰器自身无参数格式
+
+def DecFuncName(Func):                          #传入被装饰的函数
+    @wraps(Func)
+    def wrapper(FuncPram1,FuncPram2,...):       #传入被装饰的函数的参数
+        #装饰器前部分处理
+        #Func()
+        #装饰器后部分处理
+return wapper
+
+执行过程：
+    自动传入参数Func调用DecFuncName(Func)，得到带wrapper函数
+    传入参数FuncPram运行wrapper[实际这是外界()产生的调用，装饰器只是返回了一个函数]
+
+
+
+2、装饰器自身有参数
+def DecFuncName(DecFuncPram1,DecFuncPram2,DecFuncPram3,...):    #传入装饰器自身参数
+    def DecFuncNameIner(Func):                                  #传入被装饰的函数
+        @wraps(Func)
+        def wrapper(FuncPram1,FuncPram2,...):                   #传入被装饰的函数的参数
+            #装饰器前部分处理
+            #Func()
+            #装饰器后部分处理
+        return wapper
+    return DecFuncNameIner
+
+执行过程：
+    自动传入参数DecFuncPram，运行DecFuncName(DecFuncPram1)，得到DecFuncNameIner函数
+    传入Func参数调用DecFuncNameIner(Func)函数,得到wrapper函数
+    传入参数FuncPram运行wrapper[实际这是外界()产生的调用，装饰器只是返回了一个函数]
+
+
+3、装饰类自身无参数
+class DecClassName:
+    def __init__(self,Func)             #被装饰的函数
+        self.Func=Func
+    def __call__(self, *args, **kwargs) #被装饰的函数的参数
+         #装饰器前部分处理
+            #self.Func()
+         #装饰器后部分处理
+
+调用时直接@DecClassName
+
+执行过程：
+   自动传入参数Func初始化DecFuncName(Func)，得到DecClassName对象，
+   DecClassName被当作函数调用，传入参数[实际这是外界()产生的调用，装饰器只是返回了一个函数]
+
+4、装饰类自身有参数
+class DecClassName:
+    def __init__(self,DecFuncPram1,DecFuncPram2...)     #装饰类的参数
+        self.Func=Func
+    def __call__(self, Func,*args, **kwargs)            #被装饰的函数,被装饰的函数的参数
+         @wraps(Func)
+         def wrapper(Func):
+            #装饰器前部分处理
+            #Func(*args, **kwargs)
+            #装饰器后部分处理
+         return wrapper
+调用时
+    无参数：@DecClassName()
+    有参数：@DecClassName(DecFuncPram1,DecFuncPram2...)
+
+执行过程：
+   自动传入参数DecFuncPram初始化DecFuncName，得到DecClassName对象，
+   自动传入参数Func及Func函数本身参数，得到wrapper函数
+   warpper被当作函数调用，传入参数[实际这是外界()产生的调用，装饰器只是返回了一个函数]
