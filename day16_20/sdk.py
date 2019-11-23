@@ -27,12 +27,13 @@ class douyiner(Person):
 class noner(Person):
     pass
 
-#p=Person()  #TypeError: Can't instantiate abstract class Person with abstract methods say
-b=bilibiler()
-b.say()
+if __name__=="__main__":
+    #p=Person()  #TypeError: Can't instantiate abstract class Person with abstract methods say
+    b=bilibiler()
+    b.say()
 
-d=douyiner()
-d.say()
+    d=douyiner()
+    d.say()
 
-#n=noner()   #TypeError: Can't instantiate abstract class noner with abstract methods say
+    #n=noner()   #TypeError: Can't instantiate abstract class noner with abstract methods say
 

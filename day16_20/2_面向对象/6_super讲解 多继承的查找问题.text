@@ -1,0 +1,117 @@
+我们在学习 Python 类的时候，总会碰见书上的类中有 __init__() 这样一个函数，很多同学百思不得其解，其实它就是 Python 的构造方法。
+
+构造方法类似于类似 init() 这种初始化方法，来初始化新创建对象的状态，在一个对象呗创建以后会立即调用，比如像实例化一个类：
+
+f = FooBar()
+f.init()
+使用构造方法就能让它简化成如下形式：
+
+f = FooBar()
+你可能还没理解到底什么是构造方法，什么是初始化，下面我们再来举个例子：
+
+class FooBar:
+    def __init__(self):
+        self.somevar = 42
+
+>>>f = FooBar()
+>>>f.somevar
+我们会发现在初始化 FooBar 中的 somevar 的值为 42 之后，实例化直接就能够调用 somevar 的值；如果说你没有用构造方法初始化值得话，就不能够调用，明白了吗？
+
+在明白了构造方法之后，我们来点进阶的问题，那就是构造方法中的初始值无法继承的问题。
+
+例子：
+
+class Bird:
+    def __init__(self):
+          self.hungry = True
+    def eat(self):
+          if self.hungry:
+               print 'Ahahahah'
+          else:
+               print 'No thanks!'
+
+class SongBird(Bird):
+     def __init__(self):
+          self.sound = 'Squawk'
+     def sing(self):
+          print self.song()
+
+sb = SongBird()
+sb.sing()    # 能正常输出
+sb.eat()     # 报错，因为 songgird 中没有 hungry 特性
+那解决这个问题的办法有两种：
+
+1、调用未绑定的超类构造方法（多用于旧版 python 阵营）
+
+class SongBird(Bird):
+     def __init__(self):
+          Bird.__init__(self)
+          self.sound = 'Squawk'
+     def sing(self):
+          print self.song()
+原理：在调用了一个实例的方法时，该方法的self参数会自动绑定到实例上（称为绑定方法）；如果直接调用类的方法（比如Bird.__init__），那么就没有实例会被绑定，可以自由提供需要的self参数（未绑定方法）。
+
+2、使用super函数（只在新式类中有用）
+
+class SongBird(Bird):
+     def __init__(self):
+          super(SongBird,self).__init__()
+          self.sound = 'Squawk'
+     def sing(self):
+          print self.song()
+原理：它会查找所有的超类，以及超类的超类，直到找到所需的特性为止。
+
+经典的菱形继承案例，BC 继承 A，然后 D 继承 BC，创造一个 D 的对象。
+
+     ---> B ---
+A --|          |--> D
+     ---> C ---
+使用 super() 可以很好地避免构造函数被调用两次。
+
+# 思考题正确答案
+
+
+class A():
+    def __init__(self):
+        print('enter A')
+        print('leave A')
+
+
+class B(A):
+    def __init__(self):
+        print('enter B')
+        super().__init__()
+        print('leave B')
+
+
+class C(A):
+    def __init__(self):
+        print('enter C')
+        super().__init__()
+        print('leave C')
+
+
+class D(B, C):
+    def __init__(self):
+        print('enter D')
+        super().__init__()
+        print('leave D')
+
+
+d = D()
+执行结果是：
+
+enter D
+enter B
+enter C
+enter A
+leave A
+leave C
+leave B
+leave D
+yyYanis
+   yyYanis
+
+  ysh***g85@yeah.net
+
+5个月前 (06-11)
